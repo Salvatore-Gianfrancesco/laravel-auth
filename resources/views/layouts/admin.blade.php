@@ -46,7 +46,7 @@
                     <div class="position-sticky pt-3 sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/admin">
+                                <a class="nav-link" aria-current="page" href="/admin">
                                     <span data-feather="home" class="align-text-bottom"></span>
                                     Dashboard
                                 </a>

@@ -1,1 +1,10 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+.dashboard_active {
+    background-color: #cfe2ff;
+    border-radius: 5px;
+}
+
+.new_project {
+    height: 2.5rem;
+}
