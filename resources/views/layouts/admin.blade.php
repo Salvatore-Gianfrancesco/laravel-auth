@@ -52,7 +52,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">
+                                <a class="nav-link" href="{{Route('admin.projects.index')}}">
                                     <span data-feather="file" class="align-text-bottom"></span>
                                     Projects
                                 </a>
