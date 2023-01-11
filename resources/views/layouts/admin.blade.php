@@ -23,42 +23,54 @@
 
 <body>
     <div id="app">
-        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-            <!-- logo -->
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/">Boolfolio</a>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark h-100">
+                <div class="container">
+                    <!-- logo -->
+                    <a class="navbar-brand" href="{{Route('home')}}">Boolfolio</a>
 
-            <!-- dropdown button -->
-            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    <!-- dropdown menu (when page resized) -->
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId, #sidebarMenu" aria-controls="collapsibleNavId, sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-            <!-- sign out button -->
-            <div class="navbar-nav">
-                <div class="nav-item text-nowrap">
-                    <a class="nav-link px-3" href="">Sign out</a>
+                    <!-- menu links -->
+                    <div class="collapse navbar-collapse" id="collapsibleNavId">
+                        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{Route('home')}}">Home</a>
+                            </li>
+                        </ul>
+
+                        <!-- sign out -->
+                        <div class="nav-item text-nowrap">
+                            <a class="nav-link px-3 text-light" href="">Sign out</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </header>
 
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light px-0 sidebar collapse">
                     <div class="position-sticky pt-3 sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/admin">
+                                <a class="nav-link {{Route::currentRouteName() === 'admin.dashboard' ? 'active' : ''}}" aria-current="page" href="{{Route('admin.dashboard')}}">
                                     <span data-feather="home" class="align-text-bottom"></span>
                                     Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{Route('admin.projects.index')}}">
+                                <a class="nav-link {{Route::currentRouteName() === 'admin.projects.index' ? 'active' : ''}}" href="{{Route('admin.projects.index')}}">
                                     <span data-feather="file" class="align-text-bottom"></span>
-                                    Projects
+                                    Orders
                                 </a>
                             </li>
                         </ul>
                     </div>
+
                 </nav>
 
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
