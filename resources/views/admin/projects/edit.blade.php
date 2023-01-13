@@ -14,7 +14,7 @@
     </div>
     @endif
 
-    <form action="{{Route('admin.projects.update', $project->id)}}" method="post">
+    <form action="{{Route('admin.projects.update', $project->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
 
@@ -26,6 +26,17 @@
         <div class="mb-3">
             <label for="body" class="form-label">Body</label>
             <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="3" placeholder="Project body...">{{old('body', $project->body)}}</textarea>
+        </div>
+
+        <div class="mb-3 d-flex gap-3">
+            @if($project->cover_img)
+            <img src="{{asset('storage/' . $project->cover_img)}}" alt="{{$project->title}}" width="150px">
+            @endif
+
+            <div class="w-100">
+                <label for="cover_img" class="form-label">Cover Image</label>
+                <input type="file" name="cover_img" id="cover_img" class="form-control @error('cover_img') is-invalid @enderror" placeholder="Cover image...">
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Conferma</button>

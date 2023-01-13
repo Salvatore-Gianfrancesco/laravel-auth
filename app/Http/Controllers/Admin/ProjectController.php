@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -41,10 +42,12 @@ class ProjectController extends Controller
         $validated = $request->validated();
         // dd($validated);
 
-        $project = new Project();
-        $project->name = $validated['name'];
-        $project->body = $validated['body'];
-        $project->save();
+        if ($request->hasFile('cover_img')) {
+            $cover_img = Storage::put('uploads', $validated['cover_img']);
+            $validated['cover_img'] = $cover_img;
+        }
+
+        Project::create($validated);
 
         return to_route('admin.projects.index')->with('message', 'Progetto creato con successo');
     }
@@ -83,9 +86,15 @@ class ProjectController extends Controller
         $validated = $request->validated();
         // dd($validated);
 
-        $project->name = $validated['name'];
-        $project->body = $validated['body'];
-        $project->save();
+        if ($request->hasFile('cover_img')) {
+            if ($project->cover_img) {
+                Storage::delete($project->cover_img);
+            }
+            $cover_img = Storage::put('uploads', $validated['cover_img']);
+            $validated['cover_img'] = $cover_img;
+        }
+
+        $project->update($validated);
 
         return to_route('admin.projects.index')->with('message', 'Progetto modificato con successo');
     }
@@ -98,6 +107,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->cover_img) {
+            Storage::delete($project->cover_img);
+        }
+
         $project->delete();
 
         return to_route('admin.projects.index')->with('message', 'Progetto eliminato con successo');
