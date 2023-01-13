@@ -20,6 +20,7 @@ class ProjectSeeder extends Seeder
             $project = new Project();
             $project->name = $faker->sentence(3);
             $project->body = $faker->text(300);
+            // $project->cover_img = 'placeholders/' . $faker->image('storage/app/public/placeholders', 600, 300, 'Project', false, false);
             $project->save();
         }
     }
